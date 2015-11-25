@@ -10,7 +10,21 @@ html(lang='en')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==', crossorigin='anonymous')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
     link(rel='stylesheet', href=root+'css/layout.css')
+    script var SERVER_ROOT="#{root}";
   body
+    #new-item-modal.modal.fade(tabindex='-1', role='dialog')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4.modal-title
+          .modal-body
+            .loader
+              img.loader-img(src=root+'img/ring-alt.svg')
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Send message
     .container
       nav.navbar.navbar-default
         .container-fluid
@@ -20,33 +34,44 @@ html(lang='en')
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(href='#') Project name
+            a.navbar-brand(href='#')
+              i.fa.fa-cogs.main-icon
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
-              li.active
-                a(href='#') Home
               li
-                a(href='#') About
-              li
-                a(href='#') Contact
+                a(href=root)
+                  i.fa.fa-home
+                  | &nbsp;Etusivu
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | Dropdown 
+                  | &nbsp;Uusi...&nbsp;
                   span.caret
                 ul.dropdown-menu
                   li
-                    a(href='#') Action
+                    a.new-item-btn(href='#new-item-modal', data-toggle='modal', data-item-type='server', data-modal-title='Lisää palvelin')
+                      i.fa.fa-server
+                      | &nbsp;&nbsp;Palvelin
                   li
-                    a(href='#') Another action
+                    a.new-item-btn(href='#new-item-modal', data-toggle='modal', data-item-type='application', data-modal-title='Lisää sovellus')
+                      i.fa.fa-cogs
+                      | &nbsp;&nbsp;Sovellus
                   li
-                    a(href='#') Something else here
-                  li.divider(role='separator')
-                  li.dropdown-header Nav header
+                    a.new-item-btn(href='#new-item-modal', data-toggle='modal',  data-item-type='contract', data-modal-title='Lisää sopimus')
+                      i.fa.fa-file-text-o
+                      | &nbsp;&nbsp;Sopimus
                   li
-                    a(href='#') Separated link
-                  li
-                    a(href='#') One more separated link
-      block content
+                    a.new-item-btn(href='#new-item-modal',  data-toggle='modal', data-item-type='integration', data-modal-title='Lisää integraatio')
+                      i.fa.fa-random
+                      | &nbsp;&nbsp;Integraatio
+            form.navbar-form.navbar-right(role='search')
+              .form-group
+                input.top-bar-search-input.form-control(type='text', placeholder='Search')
+              button.btn.btn-primary.top-bar-search-btn(type='submit')
+                i.fa.fa-search
+      .container-fluid
+        .content
+          block content
     //Script
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==', crossorigin='anonymous')
+    script(src=root+'script/modal.js')
