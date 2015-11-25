@@ -6,7 +6,7 @@
 			url: SERVER_ROOT+'template/'+itemType,
 			dataType: 'html',
 			success: cb
-		})
+		});
 	}
 	
 	$('#new-item-modal.modal').on('show.bs.modal', function (event) {
