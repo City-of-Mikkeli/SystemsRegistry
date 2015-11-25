@@ -13,7 +13,7 @@
 	  var button = $(event.relatedTarget);
 	  $(this).find('.modal-form-container').remove();
 	  $(this).find('.loader').show();
-	   $(this).find('.modal-title').text(button.attr('data-modal-title'));
+	  $(this).find('.modal-title').text(button.attr('data-modal-title'));
 	  var itemType = button.attr('data-item-type');
 	  getFormHtml(itemType, $.proxy(function(form){
 		  var wrappedForm = $('<div>')
