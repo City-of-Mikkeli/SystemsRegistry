@@ -1,0 +1,7 @@
+form.new-item-form(action=root+'/api/application', method='POST')
+  .form-group
+    label.control-label(for='new-app-name') Nimi:
+    input#new-app-name.form-control(type='text', name='name')
+  .form-group
+    label.control-label(for='new-app-description') Kuvaus:
+    textarea#new-app-description.form-control
