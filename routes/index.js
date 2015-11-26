@@ -1,4 +1,5 @@
 var application = require('./application');
+var server = require('./server');
 
 module.exports = function(app, root){
 	
@@ -13,6 +14,12 @@ module.exports = function(app, root){
 	app.get(root+'api/application', application.list);
 	app.get(root+'api/application/:id', application.get);
 	app.delete(root+'api/application/:id', application.remove);
+	
+	app.post(root+'api/server', server.create);
+	app.put(root+'api/server/:id', server.update);
+	app.get(root+'api/server', server.list);
+	app.get(root+'api/server/:id', server.get);
+	app.delete(root+'api/server/:id', server.remove);
 	
 	// Ajax-templates
 	app.get(root+'template/application', function(req, res){
