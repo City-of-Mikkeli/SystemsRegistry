@@ -1,5 +1,6 @@
 var application = require('./application');
 var server = require('./server');
+var contract = require('./contract');
 
 module.exports = function(app, root){
 	
@@ -20,6 +21,12 @@ module.exports = function(app, root){
 	app.get(root+'api/server', server.list);
 	app.get(root+'api/server/:id', server.get);
 	app.delete(root+'api/server/:id', server.remove);
+	
+	app.post(root+'api/contract', contract.create);
+	app.put(root+'api/contract/:id', contract.update);
+	app.get(root+'api/contract', contract.list);
+	app.get(root+'api/contract/:id', contract.get);
+	app.delete(root+'api/contract/:id', contract.remove);
 	
 	// Ajax-templates
 	app.get(root+'template/application', function(req, res){
