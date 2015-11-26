@@ -1,6 +1,7 @@
 var application = require('./application');
 var server = require('./server');
 var contract = require('./contract');
+var integration = require('./integration');
 
 module.exports = function(app, root){
 	
@@ -27,6 +28,12 @@ module.exports = function(app, root){
 	app.get(root+'api/contract', contract.list);
 	app.get(root+'api/contract/:id', contract.get);
 	app.delete(root+'api/contract/:id', contract.remove);
+	
+	app.post(root+'api/integration', integration.create);
+	app.put(root+'api/integration/:id', integration.update);
+	app.get(root+'api/integration', integration.list);
+	app.get(root+'api/integration/:id', integration.get);
+	app.delete(root+'api/integration/:id', integration.remove);
 	
 	// Ajax-templates
 	app.get(root+'template/application', function(req, res){
