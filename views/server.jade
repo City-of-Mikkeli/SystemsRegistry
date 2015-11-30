@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 #{server.name}
+  hr
+  p #{server.description}
+  br
+  h3 Sopimus
+  p
+    a(href='#') Lisää sopimus
+  br
+  h3 Sovellukset
+  div
+    ul
+      each app in server.applications
+        li= app
+    a(href='#') Lisää sovellus
