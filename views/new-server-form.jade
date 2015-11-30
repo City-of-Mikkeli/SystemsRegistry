@@ -1,0 +1,7 @@
+form.new-item-form(action=root+'api/server', method='POST')
+  .form-group
+    label.control-label(for='new-server-name') Nimi:
+    input#new-server-name.form-control(type='text', name='name')
+  .form-group
+    label.control-label(for='new-server-description') Kuvaus:
+    textarea#new-server-description.form-control

@@ -1,0 +1,7 @@
+form.new-item-form(action=root+'api/contract', method='POST')
+  .form-group
+    label.control-label(for='new-contract-name') Nimi:
+    input#new-contract-name.form-control(type='text', name='name')
+  .form-group
+    label.control-label(for='new-contract-description') Kuvaus:
+    textarea#new-contract-description.form-control
