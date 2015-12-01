@@ -5,3 +5,13 @@ form.new-item-form(action=root+'api/server', method='POST')
   .form-group
     label.control-label(for='new-server-description') Kuvaus:
     textarea#new-server-description.form-control
+  .form-group
+    label.control-label(for='new-server-applications') Sovellukset:&nbsp;
+    select#new-server-applications.form-control(multiple='multiple')
+      each app in applications
+        if app.server
+          option(value=app._id, disabled='disabled') #{app.name}
+        else
+          option(value=app._id) #{app.name}
+script
+  | $('#new-server-applications').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});

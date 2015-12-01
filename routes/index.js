@@ -111,7 +111,14 @@ module.exports = function(app, root){
 	});
 	
 	app.get(root+'template/server', function(req, res){
-		res.render('new-server-form', {root: root});
+		Application.find({}, function(err, applications){
+			if(err){
+				res.status(500).send(err);
+			}else{
+				res.render('new-server-form', {root: root, applications: applications});
+			}
+		});
+		
 	});
 	
 	app.get(root+'template/contract', function(req, res){
