@@ -108,7 +108,6 @@ module.exports = function(app, root){
 				res.render('new-application-form', {root: root, servers: servers});
 			}
 		});
-		
 	});
 	
 	app.get(root+'template/server', function(req, res){
@@ -143,7 +142,34 @@ module.exports = function(app, root){
 	});
 	
 	app.get(root+'template/contract', function(req, res){
-		res.render('new-contract-form', {root: root});
+		async.parallel({
+			applications: function(cb){
+				Application.find({}, function(err, applications){
+					if(err){
+						cb(err);
+					}else{
+						cb(null, applications);
+					}
+				});
+			},
+			servers: function(cb){
+				Server.find({}, function(err, servers){
+					if(err){
+						cb(err);
+					}else{
+						cb(null, servers);
+					}
+				});
+			}
+		}, function(err, data){
+			if(err){
+				res.status(500).send(err);
+			}else{
+				data.root = root;
+				res.render('new-contract-form', data);
+			}
+		})
+		
 	});
 	
 	app.get(root+'template/integration', function(req, res){

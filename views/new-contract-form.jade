@@ -3,5 +3,34 @@ form.new-item-form(action=root+'api/contract', method='POST')
     label.control-label(for='new-contract-name') Nimi:
     input#new-contract-name.form-control(type='text', name='name')
   .form-group
+    label.control-label(for='new-contract-starts') Alkaa:
+    input#new-contract-starts.form-control(type='date')
+  .form-group
+    label.control-label(for='new-contract-ends') Loppuu:
+    input#new-contract-ends.form-control(type='date')
+  .form-group
     label.control-label(for='new-contract-description') Kuvaus:
     textarea#new-contract-description.form-control
+  .form-group
+    label.control-label(for='new-contract-applications') Sovellukset:
+    select#new-contract-applications.form-control(multiple='multiple')
+      each app in applications
+        if app.contract
+          option(value=app._id, disabled='disabled') #{app.name}
+        else
+          option(value=app._id) #{app.name}
+  .form-group
+    label.control-label(for='new-contract-servers') Palvelimet:
+    select#new-contract-servers.form-control(multiple='multiple')
+      each server in servers
+        if server.contract
+          option(value=server._id, disabled='disabled') #{server.name}
+        else
+          option(value=server._id) #{server.name}
+script
+  | $('#new-contract-starts').datepicker({format: "dd.mm.yyyy"});
+  | $('#new-contract-ends').datepicker({format: "dd.mm.yyyy"});
+  | $('#new-contract-applications').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});
+  | $('#new-contract-servers').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});
+    
+    
