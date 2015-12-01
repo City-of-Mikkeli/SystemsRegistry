@@ -13,5 +13,8 @@ block content
   div
     ul
       each app in server.applications
-        li= app
+        li
+          a.server-app(href=root+'application/'+app) #{app}
     a(href='#') Lisää sovellus
+block custom_script
+  script(src=root+'script/server-view.js')
