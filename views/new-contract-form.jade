@@ -4,10 +4,10 @@ form.new-item-form(action=root+'api/contract', method='POST')
     input#new-contract-name.form-control(type='text', name='name')
   .form-group
     label.control-label(for='new-contract-starts') Alkaa:
-    input#new-contract-starts.form-control(type='date')
+    input#new-contract-starts.form-control(type='text')
   .form-group
     label.control-label(for='new-contract-ends') Loppuu:
-    input#new-contract-ends.form-control(type='date')
+    input#new-contract-ends.form-control(type='text')
   .form-group
     label.control-label(for='new-contract-description') Kuvaus:
     textarea#new-contract-description.form-control
@@ -32,5 +32,3 @@ script
   | $('#new-contract-ends').datepicker({format: "dd.mm.yyyy"});
   | $('#new-contract-applications').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});
   | $('#new-contract-servers').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});
-    
-    

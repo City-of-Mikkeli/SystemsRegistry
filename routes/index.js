@@ -8,7 +8,7 @@ var Server = require('../model/server');
 var Contract = require('../model/contract');
 var Integration = require('../model/integration');
 
-var async = require('../model/async');
+var async = require('async');
 
 module.exports = function(app, root){
 	
@@ -168,8 +168,7 @@ module.exports = function(app, root){
 				data.root = root;
 				res.render('new-contract-form', data);
 			}
-		})
-		
+		})	
 	});
 	
 	app.get(root+'template/integration', function(req, res){
