@@ -7,9 +7,10 @@
 			var url = form.attr('action');
 			var name = $('#new-server-name').val();
 			var description = $('#new-server-description').val();
+			var applications = $('#new-server-applications').val();
 			form.hide();
 			$('.loader').show();
-			$.post(url, {name: name, description: description}, function(server){
+			$.post(url, {name: name, description: description, applications: applications}, function(server){
 				window.location.href = SERVER_ROOT+'server/'+server._id;
 			});
 		},

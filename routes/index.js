@@ -8,6 +8,7 @@ var Server = require('../model/server');
 var Contract = require('../model/contract');
 var Integration = require('../model/integration');
 
+var async = require('../model/async');
 
 module.exports = function(app, root){
 	
@@ -111,14 +112,34 @@ module.exports = function(app, root){
 	});
 	
 	app.get(root+'template/server', function(req, res){
-		Application.find({}, function(err, applications){
+		async.parallel({
+			applications: function(cb){
+				Application.find({}, function(err, applications){
+					if(err){
+						cb(err);
+					}else{
+						cb(null, applications);
+					}
+				});
+			},
+			contracts: function(cb){
+				Contract.find({}, function(err, contracts){
+					if(err){
+						cb(err);
+					}else{
+						cb(null, contracts);
+					}
+				})
+			}
+			
+		}, function(err, data){
 			if(err){
 				res.status(500).send(err);
 			}else{
-				res.render('new-server-form', {root: root, applications: applications});
+				data.root = root;
+				res.render('new-server-form', data);
 			}
 		});
-		
 	});
 	
 	app.get(root+'template/contract', function(req, res){

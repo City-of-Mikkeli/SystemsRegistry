@@ -6,7 +6,12 @@ form.new-item-form(action=root+'api/server', method='POST')
     label.control-label(for='new-server-description') Kuvaus:
     textarea#new-server-description.form-control
   .form-group
-    label.control-label(for='new-server-applications') Sovellukset:&nbsp;
+    label.control-label(for='new-server-contract') Sopimus:
+    select#new-server-contract.form-control
+      each contract in contracts
+          option(value=contract._id) #{contract.name}
+  .form-group
+    label.control-label(for='new-server-applications') Sovellukset:
     select#new-server-applications.form-control(multiple='multiple')
       each app in applications
         if app.server
@@ -15,3 +20,4 @@ form.new-item-form(action=root+'api/server', method='POST')
           option(value=app._id) #{app.name}
 script
   | $('#new-server-applications').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});
+  | $('#new-server-contract').multiselect({enableCaseInsensitiveFiltering: true, buttonWidth: "100%"});

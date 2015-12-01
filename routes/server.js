@@ -1,4 +1,6 @@
 var Server = require('../model/server');
+var Application = require('../model/application');
+var async = require('async');
 var _ = require('underscore');
 
 
@@ -14,12 +16,38 @@ exports.create = function(req, res){
 		server.name = name;
 		server.description = description;
 		server.contract = contract || null;
-		server.application = applications || [];
+		server.applications = applications || [];
 		server.save(function(err, server){
 			if(err){
 				res.status(500).send(err);
 			}else{
-				res.send(server);
+				async.each(server.applications, function(app, cb){
+					Application.findById(app, function(err, application){
+						if(err) {
+							cb(err);
+						}else{
+							if(!application){
+								cb('Application with id: '+app+' not found');
+							}else{
+								application.server = server._id;
+								application.save(function(err, application){
+									if(err){
+										cb(err);
+									}else{
+										cb();
+									}
+								});
+							}
+						}
+					});
+				}, function(err){
+					if(err){
+						server.remove();
+						res.status(500).send(err);
+					}else{
+						res.send(server);
+					}
+				});
 			}
 		});
 	}	
