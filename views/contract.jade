@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1 #{contract.name}
+  hr
+  p Sopimus alkaa: 
+    span.time-field #{contract.starts}
+  p Sopimus päättyy: 
+    span.time-field #{contract.ends}
+  br
+  p #{contract.description}
+  br
+  h3 Sovellukset
+  p
+    ul
+      each app in contract.applications
+        li
+          a.contract-app(href=root+'application/'+app) #{app}
+    br
+    a(href='#') Lisää sovellus
+  h3 Palvelimet
+  p
+    ul
+      each server in contract.servers
+        li
+          a.contract-server(href=root+'server/'+server) #{server}
+    br
+    a(href='#') Lisää palvelin
+block custom_script
+  script(src=root+'script/contract-view.js')
