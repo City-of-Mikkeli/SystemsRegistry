@@ -7,7 +7,14 @@ block content
   br
   h3 Sopimus
   p
-    a(href='#') Lisää sopimus
+    if server.contract
+      ul
+        li
+          a.server-contract(href=root+'contract/'+server.contract) #{server.contract}
+      br
+      a(href='#') Vaihda sopimus
+    else
+      a(href='#') Lisää sopimus
   br
   h3 Sovellukset
   div
