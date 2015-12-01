@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1 #{application.name}
+  hr
+  p #{application.description}
+  br
+  h3 Sopimus
+  p
+    if application.contract
+      ul
+        li
+          a.application-contract(href=root+'contract/'+application.contract) #{application.contract}
+      br
+      a(href='#') Vaihda sopimus
+    else
+      a(href='#') Lisää sopimus
+  br
+  h3 Palvelin
+  p
+    if application.server
+      ul
+        li
+          a.application-server(href=root+'contract/'+application.server) #{application.server}
+      br
+      a(href='#') Vaihda palvelin
+    else
+      a(href='#') Lisää palvelin
+  br
+  h3 Integraatiot
+  p
+    a(href='#') Lisää integraatio
+block custom_script
+  script(src=root+'script/application-view.js')
