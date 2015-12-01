@@ -100,7 +100,14 @@ module.exports = function(app, root){
 	
 	// Ajax form templates
 	app.get(root+'template/application', function(req, res){
-		res.render('new-application-form', {root: root});
+		Server.find({}, function(err, servers){
+			if(err){
+				res.status(500).send(err);
+			}else{
+				res.render('new-application-form', {root: root, servers: servers});
+			}
+		});
+		
 	});
 	
 	app.get(root+'template/server', function(req, res){

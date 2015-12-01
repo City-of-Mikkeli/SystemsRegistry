@@ -1,4 +1,5 @@
 var Application = require('../model/application');
+var Server = require('../model/server');
 var _ = require('underscore');
 
 exports.create = function(req, res){
@@ -20,7 +21,28 @@ exports.create = function(req, res){
 			if(err){
 				res.status(500).send(err);
 			}else{
-				res.send(application);
+				if(application.server !== null){
+					Server.findById(application.server, function(err, server){
+						if(err || !server){
+							application.remove();
+							res.status(500).send(err);
+						}else{
+							server.applications.push(application._id);
+							server.save(function(err, server){
+								if(err){
+									res.status(500).send(err);
+									application.remove();
+								}else{
+									res.send(application);
+								}
+							});
+						}
+						
+					});
+				}else{
+					res.send(application);
+				}
+				
 			}
 		});
 	}

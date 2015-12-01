@@ -5,3 +5,9 @@ form.new-item-form(action=root+'api/application', method='POST')
   .form-group
     label.control-label(for='new-app-description') Kuvaus:
     textarea#new-app-description.form-control
+  .form-group
+    label.control-label(for='new-app-server') Palvelin:
+    select#new-app-server.form-control.combobox
+      option(value="")
+      each server in servers
+        option(value=server._id) #{server.name}

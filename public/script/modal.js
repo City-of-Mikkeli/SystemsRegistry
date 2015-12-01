@@ -14,7 +14,17 @@
 			});
 		},
 		application: function(e){
-			
+			var form = $('.new-item-form');
+			var url = form.attr('action');
+			var name = $('#new-app-name').val();
+			var description = $('#new-app-description').val();
+			var server = $('#new-app-server').val();
+			form.hide();
+			$('.loader').show();
+			$.post(url, {name: name, description: description, server: server}, function(application){
+				console.log(application);
+				//window.location.href = SERVER_ROOT+'application/'+application._id;
+			});
 		},
 		contract: function(e){
 			
